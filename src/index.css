@@ -1,0 +1,33 @@
+:root {
+  --col-fg: #333;
+  --col-bg: #fff;
+  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+
+  font: 16px var(--font-sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--col-fg);
+  background: var(--col-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  flex: 1;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1280px;
+  box-sizing: border-box;
+  padding: 2rem;
+  text-align: left;
+}
