@@ -2,6 +2,7 @@ import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import { ProductsPageStore } from "../model";
 import { ProductCard } from "./product-card";
+import styles from "./products-page.module.css";
 
 export const ProductsPage = observer(() => {
   const [store] = useState(() => new ProductsPageStore());
@@ -10,8 +11,8 @@ export const ProductsPage = observer(() => {
   }, [store]);
 
   return (
-    <div style={{ display: "flex", }}>
-      <div style={{ width: "16rem" }}>
+    <div className={styles.layout}>
+      <aside className={styles.sidebar}>
         <div>
           <input type="text" placeholder="Поиск по названию" value={store.searchQuery} onChange={e => store.setSearchQuery(e.target.value)} />
           <button onClick={() => store.setSearchQuery("")}>x</button>
@@ -19,7 +20,7 @@ export const ProductsPage = observer(() => {
         <label>
           <input type="checkbox" checked={store.isOnlyAvailable} onChange={e => store.setIsOnlyAvailable(e.target.checked)} /> в наличии
         </label>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className={styles.sortGroup}>
           <label>
             <input type="radio" name="sort" checked={store.sortBy === "default"} onChange={e => e.target.checked && store.setSortBy("default")} /> по умолчанию
           </label>
@@ -33,20 +34,18 @@ export const ProductsPage = observer(() => {
         {store.hasActiveFilters && (
           <button onClick={() => store.resetFilters()}>Сбросить фильтры</button>
         )}
+      </aside>
+      <div className={styles.listContent}>
+        <ul className={styles.list}>
+          {store.productsListView.map(product => {
+            return (
+              <li key={product.id}>
+                <ProductCard product={product} />
+              </li>
+            )
+          })}
+        </ul>
       </div>
-      <ul style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-        gap: "1rem"
-      }}>
-        {store.productsListView.map(product => {
-          return (
-            <li key={product.id}>
-              <ProductCard product={product} />
-            </li>
-          )
-        })}
-      </ul>
     </div>
   )
 });
