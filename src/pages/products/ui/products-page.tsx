@@ -2,6 +2,7 @@ import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import { ProductsPageStore } from "../model";
 import { ProductCard } from "./product-card";
+import { Button } from "@/shared/ui/button";
 import styles from "./products-page.module.css";
 
 export const ProductsPage = observer(() => {
@@ -32,7 +33,7 @@ export const ProductsPage = observer(() => {
           </label>
         </div>
         {store.hasActiveFilters && (
-          <button onClick={() => store.resetFilters()}>Сбросить фильтры</button>
+          <Button onClick={() => store.resetFilters()}>Сбросить фильтры</Button>
         )}
       </aside>
       <div className={styles.listContent}>

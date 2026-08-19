@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { ProductPageStore } from "../model";
 import { formatPrice } from "@/shared/lib/utils";
+import { Button } from "@/shared/ui/button";
 import styles from "./product-page.module.css";
 
 interface ProductPageViewProps {
@@ -132,14 +133,13 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
           </div>
         </div>
 
-        <button
-          type="button"
+        <Button
           className={styles.addButton}
           onClick={store.addToCart}
           disabled={!selectedColor}
         >
           Добавить в корзину
-        </button>
+        </Button>
       </div>
     </section>
   );
