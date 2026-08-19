@@ -2,6 +2,7 @@
   --col-fg: #333;
   --col-bg: #fff;
   --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --header-height: 4rem;
 
   font: 16px var(--font-sans);
   letter-spacing: 0.18px;
@@ -36,5 +37,6 @@ ol {
   max-width: 1280px;
   box-sizing: border-box;
   padding: 2rem;
+  padding-top: calc(var(--header-height) + 2rem);
   text-align: left;
 }
