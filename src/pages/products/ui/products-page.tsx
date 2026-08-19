@@ -30,6 +30,9 @@ export const ProductsPage = observer(() => {
             <input type="radio" name="sort" checked={store.sortBy === "price-desc"} onChange={e => e.target.checked && store.setSortBy("price-desc")} /> цена по убыванию
           </label>
         </div>
+        {store.hasActiveFilters && (
+          <button onClick={() => store.resetFilters()}>Сбросить фильтры</button>
+        )}
       </div>
       <ul style={{
         display: "grid",

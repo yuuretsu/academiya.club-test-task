@@ -37,6 +37,20 @@ export class ProductsPageStore {
     this.sortBy = sortBy;
   };
 
+  resetFilters = () => {
+    this.searchQuery = "";
+    this.isOnlyAvailable = false;
+    this.sortBy = "default";
+  };
+
+  get hasActiveFilters() {
+    return (
+      this.searchQuery.trim() !== ""
+      || this.isOnlyAvailable
+      || this.sortBy !== "default"
+    );
+  }
+
   get productsListView() {
     const filtered = this
       .products
