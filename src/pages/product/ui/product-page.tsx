@@ -136,7 +136,7 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
         <Button
           className={styles.addButton}
           onClick={store.addToCart}
-          disabled={!selectedColor}
+          disabled={!selectedColor?.id || !store.selectedSizeId}
         >
           Добавить в корзину
         </Button>
