@@ -19,6 +19,15 @@
   flex-direction: column;
 }
 
+.searchRow {
+  display: flex;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+}
+
 .listContent {
   flex: 1;
   min-width: 0;

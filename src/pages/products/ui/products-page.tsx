@@ -13,9 +13,9 @@ export const ProductsPage = observer(() => {
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
-        <div>
-          <input type="text" placeholder="Поиск по названию" value={store.searchQuery} onChange={e => store.setSearchQuery(e.target.value)} />
-          <button onClick={() => store.setSearchQuery("")}>x</button>
+        <div className={styles.searchRow}>
+          <input className={styles.searchInput} type="text" placeholder="Поиск по названию" value={store.searchQuery} onChange={e => store.setSearchQuery(e.target.value)} />
+          {store.searchQuery && <button onClick={() => store.setSearchQuery("")}>x</button>}
         </div>
         <label>
           <input type="checkbox" checked={store.isOnlyAvailable} onChange={e => store.setIsOnlyAvailable(e.target.checked)} /> в наличии
