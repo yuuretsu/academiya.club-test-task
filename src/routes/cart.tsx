@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import { createFileRoute } from '@tanstack/react-router'
 import { cartStore } from '@/shared/cart-store'
-import { formatPrice } from '@/shared/utils'
+import { formatPrice } from '@/shared/lib/utils'
 
 const CartPage = observer(() => {
   return (

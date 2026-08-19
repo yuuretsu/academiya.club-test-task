@@ -1,9 +1,9 @@
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { useEffect, useState, type FC } from "react";
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { ProductPageStore } from "../model";
-import { formatPrice } from "@/shared/utils";
+import { formatPrice } from "@/shared/lib/utils";
 import styles from "./product-page.module.css";
 
 interface ProductPageViewProps {
@@ -15,6 +15,8 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
 
   useEffect(() => {
     store.init();
+
+    return () => store.reset();
   }, [store]);
 
   if (store.isLoading) {

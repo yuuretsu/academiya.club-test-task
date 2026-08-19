@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import type { FC } from "react";
 import styles from "./product-card.module.css";
 import { Link } from "@tanstack/react-router";
-import { formatPrice } from "@/shared/utils";
+import { formatPrice } from "@/shared/lib/utils";
 
 interface ProductCardImageProps {
   src: string
@@ -39,7 +39,7 @@ export const ProductCard: FC<ProductCardProps> = observer(({ product }) => {
           {formatPrice(price)}
         </div>
       </div>
-      <Link style={{ position: "absolute", inset: 0 }} to={`/card/$itemId`} params={{ itemId: String(product.id) }} />
+      <Link style={{ position: "absolute", inset: 0 }} to={`/product/$itemId`} params={{ itemId: String(product.id) }} />
     </div>
   )
 });

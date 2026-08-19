@@ -1,7 +1,9 @@
 import { getCategory, getProduct, getSizes } from "@/shared/api";
 import { cartStore } from "@/shared/cart-store";
+import { createUrlStorage } from "@/shared/lib/url-storage";
 import type { Product, ProductCategory, ProductColor, ProductSize } from "@/shared/types";
 import { makeAutoObservable, runInAction } from "mobx";
+import { makePersistable, stopPersisting } from "mobx-persist-store";
 
 export class ProductPageStore {
   product: Product | null = null;
@@ -20,7 +22,22 @@ export class ProductPageStore {
   }
 
   init = async () => {
-    this.isLoading = true;
+    await makePersistable(this, {
+      name: `properties`,
+      properties: [
+        "selectedColorId",
+        "selectedSizeId"
+      ],
+      storage: createUrlStorage({
+        selectedColorId: "color",
+        selectedSizeId: "size",
+      })
+    });
+
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
     try {
       const [product, sizes] = await Promise.all([
         getProduct(this.itemId),
@@ -31,8 +48,10 @@ export class ProductPageStore {
         this.product = product;
         this.sizes = sizes;
         this.category = category;
-        this.selectedColorId = product.colors[0]?.id ?? null;
-        this.selectedSizeId = null;
+        if (this.selectedColorId === null) {
+          this.selectedColorId = product.colors[0]?.id ?? null;
+        }
+
         this.imageIndex = 0;
         this.isLoading = false;
       });
@@ -42,6 +61,10 @@ export class ProductPageStore {
         this.isNotFound = true;
       });
     }
+  };
+
+  reset = () => {
+    stopPersisting(this);
   };
 
   get selectedColor(): ProductColor | null {

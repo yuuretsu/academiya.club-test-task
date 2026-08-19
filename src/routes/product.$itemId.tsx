@@ -7,6 +7,6 @@ const ProductPage = () => {
   return <ProductPageView itemId={itemId} />;
 };
 
-export const Route = createFileRoute('/card/$itemId')({
+export const Route = createFileRoute('/product/$itemId')({
   component: ProductPage,
 });
