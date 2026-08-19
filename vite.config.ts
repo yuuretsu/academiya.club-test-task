@@ -11,4 +11,7 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
+  define: {
+    __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
+  },
 })

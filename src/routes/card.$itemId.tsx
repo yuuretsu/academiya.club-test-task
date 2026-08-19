@@ -1,10 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/card/$itemId')({
-  component: ProductPage,
-})
-
-function ProductPage() {
+const ProductPage = () => {
   const { itemId } = Route.useParams()
 
   return (
@@ -13,4 +9,8 @@ function ProductPage() {
       <p>ID товара: {itemId}</p>
     </section>
   )
-}
+};
+
+export const Route = createFileRoute('/card/$itemId')({
+  component: ProductPage,
+});

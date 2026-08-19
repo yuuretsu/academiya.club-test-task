@@ -244,7 +244,7 @@ function getCategory(id: string) {
   });
 }
 
-function getProducts() {
+function getProducts(): Promise<Product[]> {
   return new Promise((resolve) => {
     setTimeout(() => resolve(products), 250);
   });
