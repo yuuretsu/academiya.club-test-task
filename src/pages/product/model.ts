@@ -89,4 +89,8 @@ export class ProductPageStore {
     }
     this.setImageIndex((this.imageIndex - 1 + this.images.length) % this.images.length);
   };
+
+  get selectedSize(): ProductSize | null {
+    return this.sizes.find(size => this.selectedSizeId === size.id) ?? null;
+  };
 }

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FC } from "react";
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { ProductPageStore } from "../model";
@@ -11,8 +11,9 @@ interface ProductPageViewProps {
   itemId: string;
 }
 
-export const ProductPageView = observer(({ itemId }: ProductPageViewProps) => {
+export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) => {
   const [store] = useState(() => new ProductPageStore(itemId));
+
   useEffect(() => {
     store.init();
   }, [store]);
@@ -32,20 +33,16 @@ export const ProductPageView = observer(({ itemId }: ProductPageViewProps) => {
 
   const product = store.product;
   const color = store.selectedColor;
-  const sizeName = (sizeId: number) =>
-    store.sizes.find((size) => size.id === sizeId)?.name ?? "";
 
   const handleAddToCart = () => {
-    if (!color || color.id == null) {
-      return;
-    }
+    if (!color) return;
     cartStore.add({
       productId: product.id,
       productName: product.name,
       colorId: color.id,
       colorName: color.name,
       sizeId: store.selectedSizeId,
-      sizeName: store.selectedSizeId != null ? sizeName(store.selectedSizeId) : null,
+      sizeName: store.selectedSize?.name || null,
       price: color.price,
     });
   };
@@ -124,16 +121,16 @@ export const ProductPageView = observer(({ itemId }: ProductPageViewProps) => {
           <div className={styles.fieldLabel}>Размер</div>
           <div className={styles.options}>
             {store.sizes.map((size) => {
-              const available = store.availableSizeIds.includes(size.id);
-              const selected = size.id === store.selectedSizeId;
+              const isAvailable = store.availableSizeIds.includes(size.id);
+              const isSelected = size.id === store.selectedSizeId;
               return (
                 <button
                   key={size.id}
                   type="button"
-                  disabled={!available}
+                  disabled={!isAvailable}
                   className={clsx(styles.optionButton, {
-                    [styles.optionActive]: selected,
-                    [styles.optionDisabled]: !available,
+                    [styles.optionActive]: isSelected,
+                    [styles.optionDisabled]: !isAvailable,
                   })}
                   onClick={() => store.selectSize(size.id)}
                 >
