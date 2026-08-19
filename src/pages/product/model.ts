@@ -1,4 +1,5 @@
 import { getCategory, getProduct, getSizes } from "@/shared/api";
+import { cartStore } from "@/shared/cart-store";
 import type { Product, ProductCategory, ProductColor, ProductSize } from "@/shared/types";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -58,6 +59,19 @@ export class ProductPageStore {
   get availableSizeIds(): number[] {
     return this.selectedColor?.sizes ?? [];
   }
+
+  addToCart = () => {
+    if (!this.product || !this.selectedColor) return;
+    cartStore.add({
+      productId: this.product.id,
+      productName: this.product.name,
+      colorId: this.selectedColor.id,
+      colorName: this.selectedColor.name,
+      sizeId: this.selectedSizeId,
+      sizeName: this.selectedSize?.name || null,
+      price: this.selectedColor.price,
+    });
+  };
 
   selectColor = (colorId: number) => {
     this.selectedColorId = colorId;

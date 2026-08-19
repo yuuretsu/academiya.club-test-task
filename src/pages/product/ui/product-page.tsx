@@ -3,7 +3,6 @@ import { useEffect, useState, type FC } from "react";
 import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 import { ProductPageStore } from "../model";
-import { cartStore } from "@/shared/cart-store";
 import { formatPrice } from "@/shared/utils";
 import styles from "./product-page.module.css";
 
@@ -31,21 +30,7 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
     );
   }
 
-  const product = store.product;
-  const color = store.selectedColor;
-
-  const handleAddToCart = () => {
-    if (!color) return;
-    cartStore.add({
-      productId: product.id,
-      productName: product.name,
-      colorId: color.id,
-      colorName: color.name,
-      sizeId: store.selectedSizeId,
-      sizeName: store.selectedSize?.name || null,
-      price: color.price,
-    });
-  };
+  const { product, selectedColor } = store;
 
   return (
     <section className={styles.page}>
@@ -62,7 +47,11 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
             </button>
           )}
           {store.selectedImage ? (
-            <img className={styles.mainImage} src={store.selectedImage} alt={color?.name ?? ""} />
+            <img
+              className={styles.mainImage}
+              src={store.selectedImage}
+              alt={selectedColor?.name ?? ""}
+            />
           ) : null}
           {store.images.length > 1 && (
             <button
@@ -94,10 +83,10 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
       <div className={styles.info}>
         {store.category && <div className={styles.category}>{store.category.name}</div>}
         <h1 className={styles.title}>{product.name}</h1>
-        {color && (
+        {selectedColor && (
           <>
-            <div className={styles.price}>{formatPrice(color.price)}</div>
-            {color.description && <p className={styles.description}>{color.description}</p>}
+            <div className={styles.price}>{formatPrice(selectedColor.price)}</div>
+            {selectedColor.description && <p className={styles.description}>{selectedColor.description}</p>}
           </>
         )}
 
@@ -141,7 +130,12 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
           </div>
         </div>
 
-        <button type="button" className={styles.addButton} onClick={handleAddToCart} disabled={!color}>
+        <button
+          type="button"
+          className={styles.addButton}
+          onClick={store.addToCart}
+          disabled={!selectedColor}
+        >
           Добавить в корзину
         </button>
       </div>
