@@ -1,6 +1,7 @@
 import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import clsx from "clsx";
 import { ProductPageStore } from "../model";
 import { cartStore } from "@/shared/cart-store";
 import { formatPrice } from "@/shared/utils";
@@ -83,7 +84,7 @@ export const ProductPageView = observer(({ itemId }: ProductPageViewProps) => {
               <button
                 key={image}
                 type="button"
-                className={`${styles.thumbnail} ${index === store.imageIndex ? styles.thumbnailActive : ""}`}
+                className={clsx(styles.thumbnail, { [styles.thumbnailActive]: index === store.imageIndex })}
                 onClick={() => store.setImageIndex(index)}
               >
                 <img src={image} alt="" />
@@ -110,7 +111,7 @@ export const ProductPageView = observer(({ itemId }: ProductPageViewProps) => {
               <button
                 key={item.id}
                 type="button"
-                className={`${styles.optionButton} ${item.id === store.selectedColorId ? styles.optionActive : ""}`}
+                className={clsx(styles.optionButton, { [styles.optionActive]: item.id === store.selectedColorId })}
                 onClick={() => store.selectColor(item.id)}
               >
                 {item.name}
@@ -130,7 +131,10 @@ export const ProductPageView = observer(({ itemId }: ProductPageViewProps) => {
                   key={size.id}
                   type="button"
                   disabled={!available}
-                  className={`${styles.optionButton} ${selected ? styles.optionActive : ""} ${!available ? styles.optionDisabled : ""}`}
+                  className={clsx(styles.optionButton, {
+                    [styles.optionActive]: selected,
+                    [styles.optionDisabled]: !available,
+                  })}
                   onClick={() => store.selectSize(size.id)}
                 >
                   {size.name}
