@@ -204,7 +204,7 @@ const products: Product[] = [
 ];
 
 
-function getSizes() {
+function getSizes(): Promise<ProductSize[]> {
   return new Promise((resolve) => {
     setTimeout(() => resolve(sizes), 250);
   });
@@ -229,7 +229,7 @@ function getCategories() {
   });
 }
 
-function getCategory(id: string) {
+function getCategory(id: string): Promise<ProductCategory> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const category = categories.find(
@@ -250,7 +250,7 @@ function getProducts(): Promise<Product[]> {
   });
 }
 
-function getProduct(id: string) {
+function getProduct(id: string): Promise<Product> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const product = products.find(

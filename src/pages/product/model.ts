@@ -21,9 +21,11 @@ export class ProductPageStore {
   init = async () => {
     this.isLoading = true;
     try {
-      const product = (await getProduct(this.itemId)) as Product;
-      const sizes = (await getSizes()) as ProductSize[];
-      const category = (await getCategory(String(product.categoryId)).catch(() => null)) as ProductCategory | null;
+      const [product, sizes] = await Promise.all([
+        getProduct(this.itemId),
+        getSizes(),
+      ]);
+      const category = await getCategory(String(product.categoryId)).catch(() => null);
       runInAction(() => {
         this.product = product;
         this.sizes = sizes;
