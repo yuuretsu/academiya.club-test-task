@@ -13,16 +13,26 @@ export class ProductsPageStore {
   searchQuery: string = "";
   isOnlyAvailable: boolean = false;
   sortBy: ProductSortBy = "default";
+  isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
   init = async () => {
-    const products = await getProducts();
-    runInAction(() => {
-      this.products = products;
-    });
+    this.isLoading = true;
+    try {
+      const products = await getProducts();
+      runInAction(() => {
+        this.products = products;
+        this.isLoading = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.isLoading = false;
+      });
+      throw error;
+    }
   };
 
   setSearchQuery = (query: string) => {

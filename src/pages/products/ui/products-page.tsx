@@ -36,15 +36,23 @@ export const ProductsPage = observer(() => {
         )}
       </aside>
       <div className={styles.listContent}>
-        <ul className={styles.list}>
-          {store.productsListView.map(product => {
-            return (
-              <li key={product.id}>
-                <ProductCard product={product} />
-              </li>
-            )
-          })}
-        </ul>
+        {store.isLoading ? (
+          <p className={styles.emptyState}>Загрузка...</p>
+        ) : store.products.length === 0 ? (
+          <p className={styles.emptyState}>В каталоге сейчас нет товаров</p>
+        ) : store.productsListView.length === 0 ? (
+          <p className={styles.emptyState}>По вашему запросу ничего не найдено</p>
+        ) : (
+          <ul className={styles.list}>
+            {store.productsListView.map(product => {
+              return (
+                <li key={product.id}>
+                  <ProductCard product={product} />
+                </li>
+              )
+            })}
+          </ul>
+        )}
       </div>
     </div>
   )
