@@ -93,6 +93,7 @@ export class ProductPageStore {
       sizeId: this.selectedSizeId,
       sizeName: this.selectedSize?.name || null,
       price: this.selectedColor.price,
+      image: this.selectedColor.images[0] ?? "",
     });
   };
 
