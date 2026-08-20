@@ -1,0 +1,67 @@
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.category {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.description {
+  margin: 0;
+  color: #555;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldLabel {
+  font-weight: 600;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.optionButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  background: var(--col-bg);
+  color: var(--col-fg);
+  cursor: pointer;
+}
+
+.optionActive {
+  border-color: #333;
+  background: #333;
+  color: #fff;
+}
+
+.optionDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.addButton {
+  align-self: flex-start;
+}
