@@ -15,14 +15,33 @@ export interface CartLine {
   quantity: number;
 }
 
+export interface PromoCode {
+  code: string;
+  type: "percent" | "fixed";
+  value: number;
+}
+
+const promoCodeList: PromoCode[] = [
+  { code: "HELLO_WORLD", type: "percent", value: 10 },
+  { code: "MINUS_50", type: "fixed", value: 50 },
+];
+
+export const fetchPromoCode = (code: string): PromoCode | null => {
+  const normalizedCode = code.trim().toUpperCase();
+
+  return promoCodeList.find((promoCode) => promoCode.code === normalizedCode) ?? null;
+};
+
 class CartStore {
   lines: CartLine[] = [];
+  promoCode: PromoCode | null = null;
+  promoCodeError: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
     makePersistable(this, {
       name: "cart",
-      properties: ["lines"],
+      properties: ["lines", "promoCode"],
       storage: window.localStorage,
     });
   }
@@ -63,6 +82,24 @@ class CartStore {
     this.lines = this.lines.filter((item) => item.key !== key);
   };
 
+  applyPromoCode = (code: string) => {
+    const promoCode = fetchPromoCode(code);
+
+    if (!promoCode) {
+      this.promoCodeError = "Промокод не найден";
+      return false;
+    }
+
+    this.promoCode = promoCode;
+    this.promoCodeError = null;
+    return true;
+  };
+
+  removePromoCode = () => {
+    this.promoCode = null;
+    this.promoCodeError = null;
+  };
+
   get totalCount() {
     return this.lines.reduce((sum, line) => sum + line.quantity, 0);
   }
@@ -72,6 +109,20 @@ class CartStore {
       (sum, line) => sum + Number.parseFloat(line.price) * line.quantity,
       0,
     );
+  }
+
+  get totalDiscount() {
+    if (!this.promoCode) return 0;
+
+    const discount = this.promoCode.type === "percent"
+      ? (this.totalPrice * this.promoCode.value) / 100
+      : this.promoCode.value;
+
+    return Math.min(discount, this.totalPrice);
+  }
+
+  get totalPriceWithDiscount() {
+    return this.totalPrice - this.totalDiscount;
   }
 }
 

@@ -14,7 +14,7 @@ export const Header = observer(() => {
           <span>Корзина</span>
           {cartStore.totalCount > 0 && (
             <span className={styles.cartBadge}>
-              {cartStore.totalCount} · {formatPrice(String(cartStore.totalPrice))}
+              {cartStore.totalCount} · {formatPrice(String(cartStore.totalPriceWithDiscount))}
             </span>
           )}
         </Link>

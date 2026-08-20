@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import { MdAdd, MdDelete, MdRemove } from "react-icons/md";
 import { useCartStore, type CartLine } from "@/shared/cart-store";
 import { formatPrice } from "@/shared/lib/utils";
+import { Button } from "@/shared/ui/button";
 import styles from "./cart-line-item.module.css";
 
 interface CartLineItemProps {
@@ -32,36 +33,36 @@ export const CartLineItem: FC<CartLineItemProps> = observer(({ line }) => {
       </div>
 
       <div className={styles.quantity}>
-        <button
-          type="button"
+        <Button
+          variant="icon"
           className={styles.quantityButton}
           onClick={() => cartStore.decreaseQuantity(line.key)}
           disabled={line.quantity <= 1}
           aria-label="Уменьшить количество"
         >
           <MdRemove aria-hidden="true" />
-        </button>
+        </Button>
         <span className={styles.quantityValue}>{line.quantity}</span>
-        <button
-          type="button"
+        <Button
+          variant="icon"
           className={styles.quantityButton}
           onClick={() => cartStore.increaseQuantity(line.key)}
           aria-label="Увеличить количество"
         >
           <MdAdd aria-hidden="true" />
-        </button>
+        </Button>
       </div>
 
       <div className={styles.lineTotal}>{linePrice}</div>
 
-      <button
-        type="button"
+      <Button
+        variant="icon"
         className={styles.removeButton}
         onClick={() => cartStore.removeLine(line.key)}
         aria-label={`Удалить ${line.productName} из корзины`}
       >
         <MdDelete aria-hidden="true" />
-      </button>
+      </Button>
     </li>
   );
 });

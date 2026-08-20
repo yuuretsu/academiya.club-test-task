@@ -55,20 +55,9 @@
 }
 
 .quantityButton {
-  width: 2rem;
-  height: 2rem;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.5rem;
   background: var(--col-bg);
   color: var(--col-fg);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.quantityButton svg {
-  font-size: 1.25rem;
 }
 
 .quantityButton:disabled {
@@ -91,20 +80,8 @@
 
 .removeButton {
   flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
-  border: none;
-  border-radius: 50%;
   background: transparent;
   color: #999;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.removeButton svg {
-  font-size: 1.5rem;
 }
 
 .removeButton:hover {
