@@ -1,6 +1,7 @@
 import { getCategory, getProduct, getSizes } from "@/shared/api";
 import { cartStore } from "@/shared/cart-store";
 import { createUrlStorage } from "@/shared/lib/url-storage";
+import { createContextFactory } from "@/shared/lib/utils";
 import type { Product, ProductCategory, ProductColor, ProductSize } from "@/shared/types";
 import { makeAutoObservable, runInAction } from "mobx";
 import { makePersistable, stopPersisting } from "mobx-persist-store";
@@ -132,3 +133,8 @@ export class ProductPageStore {
     return this.sizes.find(size => this.selectedSizeId === size.id) ?? null;
   };
 }
+
+export const {
+  useContext: useProductPageStore,
+  withProvider: withProductPageStoreProvider,
+} = createContextFactory<ProductPageStore>();

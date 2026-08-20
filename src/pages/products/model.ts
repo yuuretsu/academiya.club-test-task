@@ -1,4 +1,5 @@
 import { getProducts } from "@/shared/api";
+import { createContextFactory } from "@/shared/lib/utils";
 import type { Product } from "@/shared/types";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -89,3 +90,8 @@ export class ProductsPageStore {
     return filtered;
   }
 }
+
+export const {
+  withProvider: withProductsPageStoreProvider,
+  useContext: useProductsPageStore,
+} = createContextFactory<ProductsPageStore>();

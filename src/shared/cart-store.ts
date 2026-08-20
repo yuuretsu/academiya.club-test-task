@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { makePersistable } from "mobx-persist-store";
+import { createContextFactory } from "@/shared/lib/utils";
 
 export interface CartLine {
   key: string;
@@ -75,3 +76,8 @@ class CartStore {
 }
 
 export const cartStore = new CartStore();
+
+export const {
+  useContext: useCartStore,
+  withProvider: withCartStoreProvider,
+} = createContextFactory<CartStore>("CartStore");

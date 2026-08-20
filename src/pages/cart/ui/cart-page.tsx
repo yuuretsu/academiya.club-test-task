@@ -1,11 +1,13 @@
 import { observer } from "mobx-react";
 import { Link } from "@tanstack/react-router";
-import { cartStore } from "@/shared/cart-store";
+import { useCartStore } from "@/shared/cart-store";
 import { formatPrice } from "@/shared/lib/utils";
 import { MdAdd, MdArrowBack, MdDelete, MdRemove } from "react-icons/md";
 import styles from "./cart-page.module.css";
 
 export const CartPage = observer(() => {
+  const cartStore = useCartStore();
+
   if (cartStore.lines.length === 0) {
     return (
       <section className={styles.emptyState}>

@@ -1,10 +1,11 @@
 import { Link } from '@tanstack/react-router'
 import { observer } from 'mobx-react'
-import { cartStore } from '@/shared/cart-store'
+import { useCartStore } from '@/shared/cart-store'
 import { formatPrice } from '@/shared/lib/utils'
 import styles from './header.module.css'
 
 export const Header = observer(() => {
+  const cartStore = useCartStore();
   return (
     <header className={styles.header}>
       <nav>

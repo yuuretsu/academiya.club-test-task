@@ -1,12 +1,15 @@
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
-import { ProductsPageStore } from "../model";
+import { useEffect } from "react";
+import { ProductsPageStore, withProductsPageStoreProvider, useProductsPageStore } from "../model";
 import { ProductCard } from "./product-card";
 import { Button } from "@/shared/ui/button";
 import styles from "./products-page.module.css";
 
-export const ProductsPage = observer(() => {
-  const [store] = useState(() => new ProductsPageStore());
+export const ProductsPage = withProductsPageStoreProvider(
+  () => new ProductsPageStore()
+)(observer(() => {
+  const store = useProductsPageStore();
+
   useEffect(() => {
     store.init();
   }, [store]);
@@ -57,4 +60,4 @@ export const ProductsPage = observer(() => {
       </div>
     </div>
   )
-});
+}));

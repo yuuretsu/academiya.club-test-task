@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState, type FC } from "react";
+import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { MdArrowBack, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import clsx from "clsx";
-import { ProductPageStore } from "../model";
+import { ProductPageStore, useProductPageStore, withProductPageStoreProvider } from "../model";
 import { formatPrice } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 import styles from "./product-page.module.css";
@@ -12,8 +12,10 @@ interface ProductPageViewProps {
   itemId: string;
 }
 
-export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) => {
-  const [store] = useState(() => new ProductPageStore(itemId));
+export const ProductPageView = withProductPageStoreProvider<ProductPageViewProps>(
+  ({ itemId }) => new ProductPageStore(itemId)
+)(observer(() => {
+  const store = useProductPageStore();
 
   useEffect(() => {
     store.init();
@@ -146,4 +148,4 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
       </div>
     </section>
   );
-});
+}));
