@@ -1,9 +1,17 @@
 import type { FC } from "react";
 import { observer } from "mobx-react";
-import { useProductsPageStore } from "../model";
+import { useProductsPageStore, type ProductSortBy } from "../model";
 import { Button } from "@/shared/ui/button";
+import { Checkbox } from "@/shared/ui/checkbox";
+import { Radio, type RadioOption } from "@/shared/ui/radio";
 import { ProductsSearch } from "./products-search";
 import styles from "./products-sidebar.module.css";
+
+const sortOptions: RadioOption<ProductSortBy>[] = [
+  { value: "default", label: "по умолчанию" },
+  { value: "price-asc", label: "цена по возрастанию" },
+  { value: "price-desc", label: "цена по убыванию" },
+];
 
 export const ProductsSidebar: FC = observer(() => {
   const store = useProductsPageStore();
@@ -11,46 +19,18 @@ export const ProductsSidebar: FC = observer(() => {
   return (
     <aside className={styles.sidebar}>
       <ProductsSearch />
-      <label className={styles.option}>
-        <input
-          className={`${styles.input} ${styles.checkbox}`}
-          type="checkbox"
-          checked={store.isOnlyAvailable}
-          onChange={(e) => store.setIsOnlyAvailable(e.target.checked)}
-        />
-        в наличии
-      </label>
+      <Checkbox
+        checked={store.isOnlyAvailable}
+        onChange={store.setIsOnlyAvailable}
+        label="в наличии"
+      />
       <div className={styles.sortGroup}>
-        <label className={styles.option}>
-          <input
-            className={`${styles.input} ${styles.radio}`}
-            type="radio"
-            name="sort"
-            checked={store.sortBy === "default"}
-            onChange={(e) => e.target.checked && store.setSortBy("default")}
-          />
-          по умолчанию
-        </label>
-        <label className={styles.option}>
-          <input
-            className={`${styles.input} ${styles.radio}`}
-            type="radio"
-            name="sort"
-            checked={store.sortBy === "price-asc"}
-            onChange={(e) => e.target.checked && store.setSortBy("price-asc")}
-          />
-          цена по возрастанию
-        </label>
-        <label className={styles.option}>
-          <input
-            className={`${styles.input} ${styles.radio}`}
-            type="radio"
-            name="sort"
-            checked={store.sortBy === "price-desc"}
-            onChange={(e) => e.target.checked && store.setSortBy("price-desc")}
-          />
-          цена по убыванию
-        </label>
+        <Radio
+          name="sort"
+          value={store.sortBy}
+          options={sortOptions}
+          onChange={store.setSortBy}
+        />
       </div>
       {store.hasActiveFilters && (
         <Button onClick={() => store.resetFilters()}>Сбросить фильтры</Button>
