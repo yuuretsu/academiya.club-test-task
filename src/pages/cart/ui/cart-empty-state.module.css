@@ -1,0 +1,11 @@
+.emptyState {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.emptyState a {
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}

@@ -1,0 +1,112 @@
+.line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 6rem;
+  aspect-ratio: 2 / 3;
+  background-color: hsl(0, 0%, 95%);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.price {
+  color: #555;
+}
+
+.quantity {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantityButton {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  background: var(--col-bg);
+  color: var(--col-fg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantityButton svg {
+  font-size: 1.25rem;
+}
+
+.quantityButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.quantityValue {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.lineTotal {
+  flex-shrink: 0;
+  min-width: 5rem;
+  text-align: right;
+  font-weight: 600;
+}
+
+.removeButton {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeButton svg {
+  font-size: 1.5rem;
+}
+
+.removeButton:hover {
+  color: #333;
+}
