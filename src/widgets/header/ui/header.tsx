@@ -9,8 +9,10 @@ export const Header = observer(() => {
   return (
     <header className={styles.header}>
       <nav>
-        <Link to="/">Главная</Link>
-        <Link to="/cart" className={styles.cartLink}>
+        <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: styles.activeLink }}>
+          Главная
+        </Link>
+        <Link to="/cart" className={styles.cartLink} activeOptions={{ exact: true }} activeProps={{ className: styles.activeLink }}>
           <span>Корзина</span>
           {cartStore.totalCount > 0 && (
             <span className={styles.cartBadge}>
