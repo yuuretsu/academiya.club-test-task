@@ -21,3 +21,63 @@
   flex: 1;
   min-width: 0;
 }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1.5px solid #888;
+  background: var(--col-bg);
+  cursor: pointer;
+  position: relative;
+}
+
+.input:checked {
+  border-color: #333;
+}
+
+.checkbox {
+  border-radius: 0.25rem;
+}
+
+.checkbox:checked {
+  background: #333;
+}
+
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.radio {
+  border-radius: 50%;
+}
+
+.radio:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 50%;
+}

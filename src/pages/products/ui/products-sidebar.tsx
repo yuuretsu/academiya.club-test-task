@@ -21,40 +21,44 @@ export const ProductsSidebar: FC = observer(() => {
           <button onClick={() => store.setSearchQuery("")}>x</button>
         )}
       </div>
-      <label>
+      <label className={styles.option}>
         <input
+          className={`${styles.input} ${styles.checkbox}`}
           type="checkbox"
           checked={store.isOnlyAvailable}
           onChange={(e) => store.setIsOnlyAvailable(e.target.checked)}
-        />{" "}
+        />
         в наличии
       </label>
       <div className={styles.sortGroup}>
-        <label>
+        <label className={styles.option}>
           <input
+            className={`${styles.input} ${styles.radio}`}
             type="radio"
             name="sort"
             checked={store.sortBy === "default"}
             onChange={(e) => e.target.checked && store.setSortBy("default")}
-          />{" "}
+          />
           по умолчанию
         </label>
-        <label>
+        <label className={styles.option}>
           <input
+            className={`${styles.input} ${styles.radio}`}
             type="radio"
             name="sort"
             checked={store.sortBy === "price-asc"}
             onChange={(e) => e.target.checked && store.setSortBy("price-asc")}
-          />{" "}
+          />
           цена по возрастанию
         </label>
-        <label>
+        <label className={styles.option}>
           <input
+            className={`${styles.input} ${styles.radio}`}
             type="radio"
             name="sort"
             checked={store.sortBy === "price-desc"}
             onChange={(e) => e.target.checked && store.setSortBy("price-desc")}
-          />{" "}
+          />
           цена по убыванию
         </label>
       </div>
