@@ -19,21 +19,29 @@ export const ProductsSidebar: FC = observer(() => {
   return (
     <aside className={styles.sidebar}>
       <ProductsSearch />
-      <Checkbox
-        checked={store.isOnlyAvailable}
-        onChange={store.setIsOnlyAvailable}
-        label="в наличии"
-      />
-      <div className={styles.sortGroup}>
-        <Radio
-          name="sort"
-          value={store.sortBy}
-          options={sortOptions}
-          onChange={store.setSortBy}
+      <div className={styles.section}>
+        <h3 className={styles.sectionTitle}>Наличие</h3>
+        <Checkbox
+          checked={store.isOnlyAvailable}
+          onChange={store.setIsOnlyAvailable}
+          label="в наличии"
         />
       </div>
+      <div className={styles.section}>
+        <h3 className={styles.sectionTitle}>Сортировка</h3>
+        <div className={styles.sortGroup}>
+          <Radio
+            name="sort"
+            value={store.sortBy}
+            options={sortOptions}
+            onChange={store.setSortBy}
+          />
+        </div>
+      </div>
       {store.hasActiveFilters && (
-        <Button onClick={() => store.resetFilters()}>Сбросить фильтры</Button>
+        <div className={styles.resetRow}>
+          <Button onClick={() => store.resetFilters()}>Сбросить фильтры</Button>
+        </div>
       )}
     </aside>
   );
