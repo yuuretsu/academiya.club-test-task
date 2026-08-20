@@ -1,0 +1,17 @@
+.listContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.emptyState {
+  width: 100%;
+  text-align: center;
+  padding-top: 2rem;
+  margin: 0 auto;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}

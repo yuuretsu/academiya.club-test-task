@@ -1,0 +1,23 @@
+.sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+  flex-shrink: 0;
+  width: 16rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sortGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchRow {
+  display: flex;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+}
