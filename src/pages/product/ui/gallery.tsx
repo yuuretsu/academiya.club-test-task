@@ -22,13 +22,13 @@ export const Gallery: FC = observer(() => {
             <MdChevronLeft aria-hidden="true" />
           </button>
         )}
-        {store.selectedImage ? (
+        {store.selectedImage && (
           <img
             className={styles.mainImage}
             src={store.selectedImage}
             alt={selectedColor?.name ?? ""}
           />
-        ) : null}
+        )}
         {store.images.length > 1 && (
           <button
             type="button"
@@ -49,7 +49,7 @@ export const Gallery: FC = observer(() => {
               className={clsx(styles.thumbnail, { [styles.thumbnailActive]: index === store.imageIndex })}
               onClick={() => store.setImageIndex(index)}
             >
-              <img src={image} alt="" />
+              <img src={image} alt={`Фото ${index + 1}`} />
             </button>
           ))}
         </div>

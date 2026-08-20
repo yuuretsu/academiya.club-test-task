@@ -17,16 +17,16 @@ export const CartLineItem: FC<CartLineItemProps> = observer(({ line }) => {
   return (
     <li className={styles.line}>
       <div className={styles.imageWrapper}>
-        {line.image ? (
+        {line.image && (
           <img className={styles.image} src={line.image} alt={line.productName} />
-        ) : null}
+        )}
       </div>
 
       <div className={styles.info}>
         <div className={styles.name}>{line.productName}</div>
         <div className={styles.details}>
           <span>Цвет: {line.colorName}</span>
-          {line.sizeName ? <span>Размер: {line.sizeName}</span> : null}
+          {line.sizeName && <span>Размер: {line.sizeName}</span>}
         </div>
         <div className={styles.price}>{formatPrice(line.price)}</div>
       </div>
