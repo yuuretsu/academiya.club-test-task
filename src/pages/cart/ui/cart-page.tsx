@@ -2,6 +2,7 @@ import { observer } from "mobx-react";
 import { Link } from "@tanstack/react-router";
 import { cartStore } from "@/shared/cart-store";
 import { formatPrice } from "@/shared/lib/utils";
+import { MdAdd, MdArrowBack, MdDelete, MdRemove } from "react-icons/md";
 import styles from "./cart-page.module.css";
 
 export const CartPage = observer(() => {
@@ -10,7 +11,9 @@ export const CartPage = observer(() => {
       <section className={styles.emptyState}>
         <h1>Корзина</h1>
         <p>Ваша корзина пуста</p>
-        <Link to="/">← Вернуться к каталогу</Link>
+        <Link to="/">
+          <MdArrowBack aria-hidden="true" /> Вернуться к каталогу
+        </Link>
       </section>
     );
   }
@@ -51,7 +54,7 @@ export const CartPage = observer(() => {
                   disabled={line.quantity <= 1}
                   aria-label="Уменьшить количество"
                 >
-                  −
+                  <MdRemove aria-hidden="true" />
                 </button>
                 <span className={styles.quantityValue}>{line.quantity}</span>
                 <button
@@ -60,7 +63,7 @@ export const CartPage = observer(() => {
                   onClick={() => cartStore.increaseQuantity(line.key)}
                   aria-label="Увеличить количество"
                 >
-                  +
+                  <MdAdd aria-hidden="true" />
                 </button>
               </div>
 
@@ -72,7 +75,7 @@ export const CartPage = observer(() => {
                 onClick={() => cartStore.removeLine(line.key)}
                 aria-label={`Удалить ${line.productName} из корзины`}
               >
-                ×
+                <MdDelete aria-hidden="true" />
               </button>
             </li>
           );

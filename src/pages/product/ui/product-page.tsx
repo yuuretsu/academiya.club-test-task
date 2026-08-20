@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState, type FC } from "react";
 import { Link } from "@tanstack/react-router";
+import { MdArrowBack, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import clsx from "clsx";
 import { ProductPageStore } from "../model";
 import { formatPrice } from "@/shared/lib/utils";
@@ -28,7 +29,9 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
     return (
       <section className={styles.notFound}>
         <h1>Товар не найден</h1>
-        <Link to="/">← Вернуться к списку товаров</Link>
+        <Link to="/">
+          <MdArrowBack aria-hidden="true" /> Вернуться к списку товаров
+        </Link>
       </section>
     );
   }
@@ -46,7 +49,7 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
               onClick={store.prevImage}
               aria-label="Предыдущее фото"
             >
-              ‹
+              <MdChevronLeft aria-hidden="true" />
             </button>
           )}
           {store.selectedImage ? (
@@ -63,7 +66,7 @@ export const ProductPageView: FC<ProductPageViewProps> = observer(({ itemId }) =
               onClick={store.nextImage}
               aria-label="Следующее фото"
             >
-              ›
+              <MdChevronRight aria-hidden="true" />
             </button>
           )}
         </div>
