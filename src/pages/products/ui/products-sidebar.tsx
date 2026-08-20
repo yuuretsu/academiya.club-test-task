@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { observer } from "mobx-react";
 import { useProductsPageStore } from "../model";
 import { Button } from "@/shared/ui/button";
+import { ProductsSearch } from "./products-search";
 import styles from "./products-sidebar.module.css";
 
 export const ProductsSidebar: FC = observer(() => {
@@ -9,18 +10,7 @@ export const ProductsSidebar: FC = observer(() => {
 
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.searchRow}>
-        <input
-          className={styles.searchInput}
-          type="text"
-          placeholder="Поиск по названию"
-          value={store.searchQuery}
-          onChange={(e) => store.setSearchQuery(e.target.value)}
-        />
-        {store.searchQuery && (
-          <button onClick={() => store.setSearchQuery("")}>x</button>
-        )}
-      </div>
+      <ProductsSearch />
       <label className={styles.option}>
         <input
           className={`${styles.input} ${styles.checkbox}`}

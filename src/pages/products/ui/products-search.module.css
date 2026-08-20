@@ -1,0 +1,54 @@
+.searchBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.5rem;
+  border: 1.5px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
+  background: var(--col-bg);
+  box-sizing: border-box;
+}
+
+.searchBlock:focus-within {
+  border-color: #333;
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  color: #777;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--col-fg);
+  font: inherit;
+  font-size: inherit;
+}
+
+.searchClearButton {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchClearButton:hover {
+  color: #333;
+}
+
+.searchClearButton svg {
+  font-size: 1.3rem;
+}
